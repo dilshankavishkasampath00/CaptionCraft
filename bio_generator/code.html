@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#9e005e",
+                    "surface-tint": "#ba9eff",
+                    "primary-dim": "#8455ef",
+                    "on-tertiary-fixed-variant": "#535b71",
+                    "on-primary-fixed-variant": "#370086",
+                    "on-surface-variant": "#a3aac4",
+                    "on-tertiary-container": "#4a5167",
+                    "surface": "#060e20",
+                    "error-container": "#a70138",
+                    "on-secondary": "#460027",
+                    "surface-variant": "#192540",
+                    "on-primary-fixed": "#000000",
+                    "primary-fixed-dim": "#a27cff",
+                    "surface-bright": "#1f2b49",
+                    "on-primary": "#39008c",
+                    "outline": "#6d758c",
+                    "surface-container-highest": "#192540",
+                    "tertiary-fixed-dim": "#ccd4ee",
+                    "inverse-primary": "#6e3bd7",
+                    "on-primary-container": "#2b006e",
+                    "tertiary-container": "#dae2fd",
+                    "on-tertiary-fixed": "#373f54",
+                    "on-error": "#490013",
+                    "on-secondary-container": "#ffe5ec",
+                    "error": "#ff6e84",
+                    "secondary-fixed-dim": "#ffaccb",
+                    "secondary": "#ff67ad",
+                    "primary": "#ba9eff",
+                    "surface-container-high": "#141f38",
+                    "tertiary-fixed": "#dae2fd",
+                    "on-tertiary": "#525a70",
+                    "surface-container-lowest": "#000000",
+                    "tertiary-dim": "#ccd4ee",
+                    "inverse-surface": "#faf8ff",
+                    "surface-dim": "#060e20",
+                    "tertiary": "#eef0ff",
+                    "primary-container": "#ae8dff",
+                    "primary-fixed": "#ae8dff",
+                    "on-secondary-fixed": "#6b003e",
+                    "on-background": "#dee5ff",
+                    "outline-variant": "#40485d",
+                    "secondary-container": "#aa0266",
+                    "surface-container-low": "#091328",
+                    "on-surface": "#dee5ff",
+                    "inverse-on-surface": "#4d556b",
+                    "secondary-fixed": "#ffc1d6",
+                    "error-dim": "#d73357",
+                    "surface-container": "#0f1930",
+                    "background": "#060e20",
+                    "secondary-dim": "#ff67ad",
+                    "on-error-container": "#ffb2b9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Be Vietnam Pro"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #ba9eff 0%, #8455ef 100%);
+        }
+        .glass-panel {
+            background: rgba(25, 37, 64, 0.6);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-900/60 backdrop-blur-2xl shadow-2xl shadow-violet-500/10">
+<div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto font-['Plus_Jakarta_Sans'] tracking-tight">
+<div class="text-2xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+                CaptionCraft
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Home</a>
+<a class="text-violet-400 border-b-2 border-violet-400 pb-1 font-bold" href="#">Bio Generator</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Hashtag Generator</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-white/5 rounded-full transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-violet-400">language</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary">
+<img alt="User profile" data-alt="Close-up portrait of a stylish creative professional in a modern studio setting with soft purple neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6YLZ_l_IrwV0lkhyMd4sByJgr3FIS5altr49nL4otK70wrSiwR5zFKiMb_kyzKeL1DX_or8m_aFW5RIF11eFXiIK7mbeDvAH1EzrhcktKp7PBl1rBjgjFcbltPNI3_wC3UE3Kfaqblyaqfawgj-nptbnnnyfqxfiEmYXaRgJMxqNOb9PCXpVLdav46MOh-Wz3kZZM16o0llAtkhhszEa6kp8sewjHWVYCr_Jjwi4cT5FuIG-UKnjH5s4VmTegAixgvEsqlaH96z2j"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+<!-- Hero & Kinetic Aura -->
+<div class="relative mb-16">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
+<div class="absolute -top-12 right-0 w-64 h-64 bg-secondary/15 blur-[100px] rounded-full"></div>
+<div class="relative z-10 text-center md:text-left max-w-3xl">
+<span class="inline-block px-4 py-1.5 rounded-sm bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest uppercase mb-6">
+                    AI-Powered Creative
+                </span>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 leading-[0.9]">
+                    Craft your <span class="text-transparent bg-clip-text kinetic-gradient">digital soul.</span>
+</h1>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-xl font-light">
+                    Transform your personality into a high-converting social bio in seconds. Stand out from the noise.
+                </p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Input Section -->
+<section class="lg:col-span-5 bg-surface-container-low p-8 rounded-xl relative overflow-hidden border border-outline-variant/15">
+<div class="relative z-10">
+<h2 class="font-headline text-2xl font-bold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">psychology</span>
+                        Describe your vibe
+                    </h2>
+<form class="space-y-8">
+<div class="space-y-3">
+<label class="text-sm font-semibold tracking-wide text-primary uppercase ml-1">Tell us about yourself</label>
+<textarea class="w-full bg-surface-container-high border-none rounded-DEFAULT p-5 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/50 transition-all min-h-[160px]" placeholder="e.g. Travel photographer based in Kandy, coffee addict, obsessed with vintage film cameras and minimalism..."></textarea>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-semibold tracking-wide text-primary uppercase ml-1">Target Platform</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="cursor-pointer group">
+<input checked="" class="hidden peer" name="platform" type="radio" value="instagram"/>
+<div class="p-4 rounded-DEFAULT bg-surface-container-high peer-checked:bg-secondary-container peer-checked:text-on-secondary-container border border-transparent peer-checked:border-secondary transition-all flex items-center gap-3">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">photo_camera</span>
+<span class="font-bold">Instagram</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="hidden peer" name="platform" type="radio" value="tiktok"/>
+<div class="p-4 rounded-DEFAULT bg-surface-container-high peer-checked:bg-secondary-container peer-checked:text-on-secondary-container border border-transparent peer-checked:border-secondary transition-all flex items-center gap-3">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">music_video</span>
+<span class="font-bold">TikTok</span>
+</div>
+</label>
+</div>
+</div>
+<button class="w-full py-5 rounded-full kinetic-gradient text-on-primary font-black text-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-3 active:scale-95 transition-transform" type="submit">
+<span>GENERATE MAGIC</span>
+<span class="material-symbols-outlined" data-weight="fill">auto_awesome</span>
+</button>
+</form>
+</div>
+</section>
+<!-- Results Grid -->
+<section class="lg:col-span-7 space-y-8">
+<div class="flex items-end justify-between px-2">
+<h3 class="font-headline text-3xl font-extrabold tracking-tight">Curated <span class="text-secondary italic">Options</span></h3>
+<span class="text-outline text-sm">3 Results Found</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Bio Option 1 -->
+<div class="group relative bg-surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-primary/30 transition-all flex flex-col justify-between overflow-hidden">
+<div class="absolute -top-4 -right-4 w-20 h-20 bg-primary/5 rounded-full blur-2xl transition-all group-hover:bg-primary/20"></div>
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-tighter">Aesthetic</span>
+<button class="text-outline hover:text-white transition-colors">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+<p class="text-on-surface text-lg leading-relaxed font-medium">
+                                Capturing the soul of Sri Lanka through a 35mm lens. 🎞️☕️<br/>
+                                Minimalist vibes | Kandy based.<br/>
+                                Let’s find beauty in the mundane.
+                            </p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10 flex items-center justify-between">
+<span class="text-xs text-outline italic">Perfect for Instagram Feed</span>
+<span class="material-symbols-outlined text-secondary text-sm">trending_up</span>
+</div>
+</div>
+<!-- Bio Option 2 (Sinhala Example) -->
+<div class="group relative bg-surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-secondary/30 transition-all flex flex-col justify-between overflow-hidden md:translate-y-8">
+<div class="absolute -bottom-4 -left-4 w-24 h-24 bg-secondary/5 rounded-full blur-2xl transition-all group-hover:bg-secondary/20"></div>
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-tighter">Localized</span>
+<button class="text-outline hover:text-white transition-colors">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+<p class="text-on-surface text-xl leading-relaxed font-bold">
+                                මහනුවර සුන්දරත්වය 35mm කාචයකින්. 📸✨<br/>
+                                චාම් ජීවිතයක රසය විඳින්න එන්න.<br/>
+                                කෝපි සහ කැමරා. ☕️🎞️
+                            </p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10 flex items-center justify-between">
+<span class="text-xs text-outline italic">High Engagement in SL</span>
+<span class="material-symbols-outlined text-primary text-sm">language</span>
+</div>
+</div>
+<!-- Bio Option 3 -->
+<div class="group relative bg-surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-primary/30 transition-all flex flex-col justify-between overflow-hidden">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-tighter">Short &amp; Punchy</span>
+<button class="text-outline hover:text-white transition-colors">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+<p class="text-on-surface text-lg leading-relaxed">
+                                📸 Capturing Kandy.<br/>
+                                ☕️ Powered by Caffeine.<br/>
+                                🎞️ Film isn't dead.<br/>
+                                📍 SL
+                            </p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10 flex items-center justify-between">
+<span class="text-xs text-outline italic">Best for TikTok Bio</span>
+<span class="material-symbols-outlined text-secondary text-sm">bolt</span>
+</div>
+</div>
+<!-- CTA Feature Card -->
+<div class="bg-gradient-to-br from-surface-variant to-surface p-1 rounded-lg md:translate-y-8">
+<div class="h-full bg-surface p-8 rounded-[calc(1rem-4px)] flex flex-col justify-center items-center text-center space-y-4">
+<div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-3xl">auto_fix_high</span>
+</div>
+<h4 class="font-headline font-bold text-xl">Need more vibes?</h4>
+<p class="text-on-surface-variant text-sm">Our AI can learn your style. Upgrade to Pro for unlimited variants.</p>
+<button class="text-primary font-bold text-sm uppercase tracking-widest hover:underline underline-offset-8">Explore Pro →</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 mt-20 border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="text-xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+                    CaptionCraft
+                </div>
+<p class="text-slate-500 text-sm font-['Be_Vietnam_Pro']">© 2024 CaptionCraft. Powered by AI.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-fuchsia-400 transition-opacity duration-300 underline-offset-4 hover:underline" href="#">Terms</a>
+<a class="text-slate-500 hover:text-fuchsia-400 transition-opacity duration-300 underline-offset-4 hover:underline" href="#">Privacy</a>
+<a class="text-slate-500 hover:text-fuchsia-400 transition-opacity duration-300 underline-offset-4 hover:underline" href="#">Twitter</a>
+<a class="text-slate-500 hover:text-fuchsia-400 transition-opacity duration-300 underline-offset-4 hover:underline" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+<!-- Floating Navigation (Mobile Only) -->
+<div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-panel border border-white/10 px-8 py-4 rounded-xl flex items-center gap-10">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">home</span>
+</button>
+<button class="text-primary scale-125">
+<span class="material-symbols-outlined" data-weight="fill">history_edu</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">tag</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</body></html>

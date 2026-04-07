@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CaptionCraft AI</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#09090b", // zinc-950
+              "surface-variant": "#18181b", // zinc-900
+              "surface-container-lowest": "#000000",
+              "surface-container-low": "#18181b",
+              "surface-container": "#27272a", // zinc-800
+              "surface-container-high": "#27272a",
+              "surface-container-highest": "#3f3f46", // zinc-700
+              "surface-bright": "#27272a",
+              "primary": "#4f46e5", // indigo-600
+              "primary-dim": "#3730a3", // indigo-800
+              "secondary": "#0ea5e9", // sky-500
+              "secondary-dim": "#0284c7",
+              "on-surface": "#fafafa", // zinc-50
+              "on-surface-variant": "#a1a1aa", // zinc-400
+              "on-background": "#fafafa",
+              "outline": "#52525b",
+              "outline-variant": "#3f3f46",
+              "primary-container": "#e0e7ff",
+              "on-primary-container": "#312e81",
+              "secondary-container": "#e0f2fe",
+              "on-secondary-container": "#0c4a6e",
+              "on-primary": "#ffffff",
+              "error": "#ef4444",
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+              full: "9999px"
+            },
+            fontFamily: {
+              headline: ["Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              label: ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-surface text-on-background font-body selection:bg-primary/30 selection:text-primary min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
