@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_KEY = "AIzaSyAiu21pz2Uie9l0aKBKOCnIiAmIH6Eyyc8";
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 export default function Home() {
   const [topic, setTopic] = useState("");
