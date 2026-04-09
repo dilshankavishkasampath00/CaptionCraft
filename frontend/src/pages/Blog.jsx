@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export default function Blog() {
   const posts = [
@@ -28,6 +29,10 @@ export default function Blog() {
 
   return (
     <main className="relative pt-24 pb-16 min-h-screen px-6 max-w-5xl mx-auto">
+      <Helmet>
+        <title>Social Media Growth Blog | CaptionCraft AI</title>
+        <meta name="description" content="Master the art of social media growth with our latest insights, strategies, and platform-specific tips for Instagram, TikTok, and LinkedIn." />
+      </Helmet>
       <div className="text-center mb-16">
         <h1 className="font-headline text-4xl md:text-5xl font-bold text-on-surface mb-4">CaptionCraft Blog</h1>
         <p className="text-xl text-on-surface-variant max-w-2xl mx-auto">Master the art of social media growth with our latest insights, strategies, and platform-specific tips.</p>

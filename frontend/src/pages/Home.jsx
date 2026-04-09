@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
@@ -73,6 +74,10 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 
   return (
     <main className="relative kinetic-bg pt-10 min-h-screen">
+      <Helmet>
+        <title>Free AI Caption Generator - Instagram & TikTok | CaptionCraft</title>
+        <meta name="description" content="Generate viral, highly engaging captions and hashtags for your Instagram and TikTok posts instantly using our free AI caption generator." />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative px-6 py-24 md:py-32 flex flex-col items-center text-center max-w-5xl mx-auto overflow-hidden">
         

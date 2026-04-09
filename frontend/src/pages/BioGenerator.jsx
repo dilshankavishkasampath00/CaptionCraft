@@ -1,6 +1,12 @@
+import { Helmet } from "react-helmet-async";
+
 export default function BioGenerator() {
   return (
     <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
+      <Helmet>
+        <title>AI Social Media Bio Generator - Instantly Craft Your Digital Soul</title>
+        <meta name="description" content="Use our free AI bio generator to create unique, engaging, and professional social media bios for Instagram, TikTok, LinkedIn, and more." />
+      </Helmet>
       {/* Hero & Kinetic Aura */}
       <div className="relative mb-16">
         <div className="relative z-10 text-center md:text-left max-w-3xl">

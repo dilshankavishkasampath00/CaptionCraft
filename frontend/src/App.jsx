@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import TopNavBar from "./components/TopNavBar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -15,6 +16,11 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
+        <Helmet>
+          <title>CaptionCraft AI - Social Media Caption & Bio Generator</title>
+          <meta name="description" content="Generate catchy, engaging Instagram and TikTok captions, bios, and hashtags instantly with CaptionCraft AI." />
+          <meta name="keywords" content="Instagram captions, TikTok bio, hashtag generator, AI captions, social media tools" />
+        </Helmet>
         <TopNavBar />
         <div className="flex-grow">
           <Routes>

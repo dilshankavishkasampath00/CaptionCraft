@@ -10,8 +10,8 @@ export default function TopNavBar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-surface-container">
-      <div className="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto tracking-tight">
+    <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-surface-container">
+      <nav className="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto tracking-tight">
         <div className="flex items-center gap-2 group">
           <span className="text-2xl font-bold tracking-tight text-on-surface">
             CaptionCraft
@@ -38,7 +38,7 @@ export default function TopNavBar() {
             </span>
           </Link>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }

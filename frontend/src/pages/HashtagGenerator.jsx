@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
@@ -70,6 +71,10 @@ Limit each array to 10 hashtags (30 hashtags total).
 
   return (
     <main className="relative pt-24 pb-16 min-h-screen">
+      <Helmet>
+        <title>Viral Hashtag Generator - Instagram & TikTok Strategy</title>
+        <meta name="description" content="Stop guessing! Let our AI generate the perfect mix of niche, trending, and broad hashtags to maximize your reach on Instagram, TikTok and LinkedIn." />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
