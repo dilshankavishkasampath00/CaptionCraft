@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { callDeepSeek } from "../utils/api";
 
 const API_KEY = import.meta.env.VITE_DEEPSEEK_API_KEY;
 
@@ -32,24 +33,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 Limit each array to 10 hashtags (30 hashtags total).
 `;
 
-      const res = await fetch("https://api.deepseek.com/chat/completions", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-          model: "deepseek-chat",
-          messages: [{ role: "user", content: prompt }],
-          temperature: 0.7,
-          response_format: { type: "json_object" }
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error?.message || "Failed to generate");
-
-      let text = data.choices[0].message.content;
+      const text = await callDeepSeek(prompt, API_KEY);
       const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
          setResults(JSON.parse(jsonMatch[0]));
