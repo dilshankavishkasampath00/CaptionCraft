@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEY = import.meta.env.VITE_DEEPSEEK_API_KEY;
 
 export default function HashtagGenerator() {
   const [topic, setTopic] = useState("");
@@ -32,22 +32,24 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 Limit each array to 10 hashtags (30 hashtags total).
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
+      const res = await fetch("https://api.deepseek.com/chat/completions", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`
+        },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7,
-            responseMimeType: "application/json"
-          }
+          model: "deepseek-chat",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+          response_format: { type: "json_object" }
         }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || "Failed to generate");
 
-      let text = data.candidates[0].content.parts[0].text;
+      let text = data.choices[0].message.content;
       const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
          setResults(JSON.parse(jsonMatch[0]));

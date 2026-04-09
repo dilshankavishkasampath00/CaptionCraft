@@ -1,6 +1,70 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
+const API_KEY = import.meta.env.VITE_DEEPSEEK_API_KEY;
+
 export default function BioGenerator() {
+  const [vibe, setVibe] = useState("");
+  const [platform, setPlatform] = useState("Instagram");
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState(null);
+  const [error, setError] = useState("");
+
+  const handleGenerate = async () => {
+    if (!vibe.trim()) {
+      setError("Please describe your vibe!");
+      return;
+    }
+    setError("");
+    setLoading(true);
+
+    try {
+      const prompt = `Generate 3 distinct social media bios for ${platform}. 
+User Description: ${vibe}
+
+Please provide 3 variations:
+1. Aesthetic/Creative
+2. Professional/Authoritative
+3. Short & Punchy
+
+Include relevant emojis.
+Return exactly this format as raw JSON:
+{
+  "bios": [
+    {"type": "Aesthetic", "content": "bio text", "note": "Perfect for Instagram Feed"},
+    {"type": "Professional", "content": "bio text", "note": "High Engagement"},
+    {"type": "Punchy", "content": "bio text", "note": "Best for TikTok Bio"}
+  ]
+}
+`;
+
+      const res = await fetch("https://api.deepseek.com/chat/completions", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "deepseek-chat",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+          response_format: { type: "json_object" }
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error?.message || "Failed to generate");
+
+      let text = data.choices[0].message.content;
+      setResults(JSON.parse(text).bios);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
       <Helmet>
@@ -35,6 +99,8 @@ export default function BioGenerator() {
               <div className="space-y-3">
                 <label className="text-sm font-semibold tracking-wide text-primary uppercase ml-1">Tell us about yourself</label>
                 <textarea 
+                  value={vibe}
+                  onChange={(e) => setVibe(e.target.value)}
                   className="w-full bg-surface-container-high border-none rounded-DEFAULT p-5 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/50 transition-all min-h-[160px]" 
                   placeholder="e.g. Travel photographer based in Kandy, coffee addict, obsessed with vintage film cameras and minimalism..."
                 ></textarea>
@@ -43,27 +109,40 @@ export default function BioGenerator() {
               <div className="space-y-3">
                 <label className="text-sm font-semibold tracking-wide text-primary uppercase ml-1">Target Platform</label>
                 <div className="grid grid-cols-2 gap-4">
-                  <label className="cursor-pointer group">
-                    <input className="hidden peer" name="platform" type="radio" value="instagram" defaultChecked />
-                    <div className="p-4 rounded-DEFAULT bg-surface-container-high peer-checked:bg-secondary-container peer-checked:text-on-secondary-container border border-transparent peer-checked:border-secondary transition-all flex items-center gap-3">
-                      <span className="material-symbols-outlined group-hover:scale-110 transition-transform">photo_camera</span>
-                      <span className="font-bold">Instagram</span>
-                    </div>
-                  </label>
+                  <button 
+                    type="button"
+                    onClick={() => setPlatform("Instagram")}
+                    className={`p-4 rounded-DEFAULT border transition-all flex items-center gap-3 ${platform === "Instagram" ? "bg-secondary-container text-on-secondary-container border-secondary" : "bg-surface-container-high border-transparent text-on-surface-variant"}`}
+                  >
+                    <span className="material-symbols-outlined">photo_camera</span>
+                    <span className="font-bold">Instagram</span>
+                  </button>
                   
-                  <label className="cursor-pointer group">
-                    <input className="hidden peer" name="platform" type="radio" value="tiktok" />
-                    <div className="p-4 rounded-DEFAULT bg-surface-container-high peer-checked:bg-secondary-container peer-checked:text-on-secondary-container border border-transparent peer-checked:border-secondary transition-all flex items-center gap-3">
-                      <span className="material-symbols-outlined group-hover:scale-110 transition-transform">movie</span>
-                      <span className="font-bold">TikTok</span>
-                    </div>
-                  </label>
+                  <button 
+                    type="button"
+                    onClick={() => setPlatform("TikTok")}
+                    className={`p-4 rounded-DEFAULT border transition-all flex items-center gap-3 ${platform === "TikTok" ? "bg-secondary-container text-on-secondary-container border-secondary" : "bg-surface-container-high border-transparent text-on-surface-variant"}`}
+                  >
+                    <span className="material-symbols-outlined">movie</span>
+                    <span className="font-bold">TikTok</span>
+                  </button>
                 </div>
               </div>
 
-              <button className="w-full py-4 rounded-lg bg-primary text-on-primary font-semibold text-lg shadow hover:shadow-md flex items-center justify-center gap-3 active:scale-95 transition-transform" type="button">
-                <span>GENERATE MAGIC</span>
-                <span className="material-symbols-outlined">auto_awesome</span>
+              {error && (
+                <div className="p-4 bg-error/20 text-error rounded-lg text-sm font-medium border border-error/30">
+                  {error}
+                </div>
+              )}
+
+              <button 
+                onClick={handleGenerate}
+                disabled={loading}
+                className="w-full py-4 rounded-lg bg-primary text-on-primary font-semibold text-lg shadow hover:shadow-md flex items-center justify-center gap-3 active:scale-95 transition-transform disabled:opacity-50" 
+                type="button"
+              >
+                <span>{loading ? "BREWING..." : "GENERATE MAGIC"}</span>
+                <span className={`material-symbols-outlined ${loading ? "animate-spin" : ""}`}>{loading ? "hourglass_empty" : "auto_awesome"}</span>
               </button>
             </form>
           </div>
@@ -73,79 +152,45 @@ export default function BioGenerator() {
         <section className="lg:col-span-7 space-y-8">
           <div className="flex items-end justify-between px-2">
             <h3 className="font-headline text-3xl font-extrabold tracking-tight">Curated <span className="text-secondary italic">Options</span></h3>
-            <span className="text-outline text-sm">3 Results Found</span>
+            <span className="text-outline text-sm">{results ? results.length : 0} Results Found</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Bio Option 1 */}
-            <div className="group relative bg-surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-primary/30 transition-all flex flex-col justify-between overflow-hidden">
-
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-tighter">Aesthetic</span>
-                  <button className="text-outline hover:text-white transition-colors">
-                    <span className="material-symbols-outlined">content_copy</span>
-                  </button>
+            {results ? (
+              results.map((bio, index) => (
+                <div 
+                  key={index} 
+                  className={`group relative bg-surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-primary/30 transition-all flex flex-col justify-between overflow-hidden ${(index === 1 && "md:translate-y-8") || (index === 3 && "md:translate-y-8")}`}
+                >
+                  <div>
+                    <div className="flex justify-between items-start mb-6">
+                      <span className="bg-primary/10 text-primary px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-tighter">{bio.type}</span>
+                      <button 
+                        onClick={() => navigator.clipboard.writeText(bio.content)}
+                        className="text-outline hover:text-white transition-colors"
+                      >
+                        <span className="material-symbols-outlined">content_copy</span>
+                      </button>
+                    </div>
+                    <p className="text-on-surface text-lg leading-relaxed font-medium whitespace-pre-wrap">
+                      {bio.content}
+                    </p>
+                  </div>
+                  <div className="mt-8 pt-6 border-t border-outline-variant/10 flex items-center justify-between">
+                    <span className="text-xs text-outline italic">{bio.note}</span>
+                    <span className="material-symbols-outlined text-secondary text-sm">trending_up</span>
+                  </div>
                 </div>
-                <p className="text-on-surface text-lg leading-relaxed font-medium">
-                  Capturing the soul of Sri Lanka through a 35mm lens. 🎞️☕️<br/>
-                  Minimalist vibes | Kandy based.<br/>
-                  Let’s find beauty in the mundane.
-                </p>
+              ))
+            ) : (
+              <div className="col-span-full py-20 text-center border border-dashed border-outline/20 rounded-xl">
+                 <span className="material-symbols-outlined text-6xl text-outline/30 mb-4 block">face_6</span>
+                 <p className="text-on-surface-variant">Describe your vibe to see the magic happen!</p>
               </div>
-              <div className="mt-8 pt-6 border-t border-outline-variant/10 flex items-center justify-between">
-                <span className="text-xs text-outline italic">Perfect for Instagram Feed</span>
-                <span className="material-symbols-outlined text-secondary text-sm">trending_up</span>
-              </div>
-            </div>
-
-            {/* Bio Option 2 */}
-            <div className="group relative bg-surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-secondary/30 transition-all flex flex-col justify-between overflow-hidden md:translate-y-8">
-
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-tighter">Professional</span>
-                  <button className="text-outline hover:text-white transition-colors">
-                    <span className="material-symbols-outlined">content_copy</span>
-                  </button>
-                </div>
-                <p className="text-on-surface text-xl leading-relaxed font-bold">
-                  Helping brands tell their story through a 35mm lens. 📸✨<br/>
-                  Embracing simplicity & authentic moments.<br/>
-                  Coffee & Cameras. ☕️🎞️
-                </p>
-              </div>
-              <div className="mt-8 pt-6 border-t border-outline-variant/10 flex items-center justify-between">
-                <span className="text-xs text-outline italic">High Engagement</span>
-                <span className="material-symbols-outlined text-primary text-sm">trending_up</span>
-              </div>
-            </div>
-
-            {/* Bio Option 3 */}
-            <div className="group relative bg-surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-primary/30 transition-all flex flex-col justify-between overflow-hidden">
-
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-tighter">Short & Punchy</span>
-                  <button className="text-outline hover:text-white transition-colors">
-                    <span className="material-symbols-outlined">content_copy</span>
-                  </button>
-                </div>
-                <p className="text-on-surface text-lg leading-relaxed">
-                  📸 Capturing Kandy.<br/>
-                  ☕️ Powered by Caffeine.<br/>
-                  🎞️ Film isn't dead.<br/>
-                  📍 SL
-                </p>
-              </div>
-              <div className="mt-8 pt-6 border-t border-outline-variant/10 flex items-center justify-between">
-                <span className="text-xs text-outline italic">Best for TikTok Bio</span>
-                <span className="material-symbols-outlined text-secondary text-sm">bolt</span>
-              </div>
-            </div>
+            )}
 
             {/* CTA Feature Card */}
-            <div className="bg-gradient-to-br from-surface-variant to-surface p-1 rounded-lg md:translate-y-8">
+            <div className={`bg-gradient-to-br from-surface-variant to-surface p-1 rounded-lg ${results && results.length % 2 !== 0 ? "md:translate-y-8" : ""}`}>
               <div className="h-full bg-surface p-8 rounded-[calc(1rem-4px)] flex flex-col justify-center items-center text-center space-y-4">
                 <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-2">
                   <span className="material-symbols-outlined text-primary text-3xl">auto_fix_high</span>

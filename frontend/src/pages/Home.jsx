@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEY = import.meta.env.VITE_DEEPSEEK_API_KEY;
 
 export default function Home() {
   const [topic, setTopic] = useState("");
@@ -33,22 +33,24 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 }
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
+      const res = await fetch("https://api.deepseek.com/chat/completions", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`
+        },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7,
-            responseMimeType: "application/json"
-          }
+          model: "deepseek-chat",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+          response_format: { type: "json_object" }
         }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || "Failed to generate");
 
-      let text = data.candidates[0].content.parts[0].text;
+      let text = data.choices[0].message.content;
       
       // Strip markdown code block if present
       const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -83,7 +85,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
         
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15 mb-8">
           <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-          <span className="text-xs font-bold tracking-widest uppercase font-label text-on-surface-variant">Powered by Gemini 2.5</span>
+          <span className="text-xs font-bold tracking-widest uppercase font-label text-on-surface-variant">Powered by DeepSeek AI</span>
         </div>
         
         <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-on-surface leading-[1.1]">
