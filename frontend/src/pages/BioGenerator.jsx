@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
 
 export default function BioGenerator() {
   const [vibe, setVibe] = useState("");
@@ -38,7 +39,7 @@ Return exactly this format as raw JSON:
 }
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

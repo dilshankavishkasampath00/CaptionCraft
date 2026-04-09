@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
 
 export default function HashtagGenerator() {
   const [topic, setTopic] = useState("");
@@ -32,7 +33,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 Limit each array to 10 hashtags (30 hashtags total).
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
