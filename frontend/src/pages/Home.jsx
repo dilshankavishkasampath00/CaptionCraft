@@ -34,7 +34,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 }
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -84,7 +84,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
         
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15 mb-8">
           <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-          <span className="text-xs font-bold tracking-widest uppercase font-label text-on-surface-variant">Powered by Gemini 1.5 Flash</span>
+          <span className="text-xs font-bold tracking-widest uppercase font-label text-on-surface-variant">Powered by Gemini 2.5 Flash</span>
         </div>
         
         <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-on-surface leading-[1.1]">
