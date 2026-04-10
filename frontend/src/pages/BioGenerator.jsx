@@ -46,7 +46,7 @@ Return exactly this format as raw JSON:
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.7,
-            responseMimeType: "application/json"
+            response_mime_type: "application/json"
           }
         }),
       });

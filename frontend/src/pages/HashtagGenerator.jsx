@@ -40,7 +40,7 @@ Limit each array to 10 hashtags (30 hashtags total).
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.7,
-            responseMimeType: "application/json"
+            response_mime_type: "application/json"
           }
         }),
       });
