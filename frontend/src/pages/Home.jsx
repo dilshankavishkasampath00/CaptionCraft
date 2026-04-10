@@ -40,8 +40,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
-            temperature: 0.7,
-            response_mime_type: "application/json"
+            temperature: 0.7
           }
         }),
       });

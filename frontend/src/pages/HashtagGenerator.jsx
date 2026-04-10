@@ -39,8 +39,7 @@ Limit each array to 10 hashtags (30 hashtags total).
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
-            temperature: 0.7,
-            response_mime_type: "application/json"
+            temperature: 0.7
           }
         }),
       });
