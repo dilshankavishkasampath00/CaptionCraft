@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEY = import.meta.env.VITE_AI_API_KEY;
 console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
 
 export default function Home() {
@@ -34,21 +34,26 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 }
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`, {
+      const res = await fetch(`https://openrouter.ai/api/v1/chat/completions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`,
+          "HTTP-Referer": window.location.origin,
+          "X-Title": "CaptionCraft App"
+        },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7
-          }
+          model: "google/gemini-2.5-flash",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+          max_tokens: 1000
         }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || "Failed to generate");
 
-      let text = data.candidates[0].content.parts[0].text;
+      let text = data.choices[0].message.content;
       
       // Strip markdown code block if present
       const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -73,77 +78,97 @@ Return exactly this format as raw JSON without markdown format blocks around it:
   ];
 
   return (
-    <main className="relative kinetic-bg pt-10 min-h-screen">
+    <main className="relative kinetic-bg pt-10 min-h-screen overflow-hidden">
       <Helmet>
         <title>Free AI Caption Generator - Instagram & TikTok | CaptionCraft</title>
         <meta name="description" content="Generate viral, highly engaging captions and hashtags for your Instagram and TikTok posts instantly using our free AI caption generator." />
       </Helmet>
+
+      {/* Background Decorative Elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/15 blur-[120px] rounded-full pointer-events-none animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-[20%] right-[-5%] w-[20%] h-[20%] bg-accent/20 blur-[100px] rounded-full pointer-events-none animate-pulse" style={{ animationDelay: '1s' }}></div>
+
       {/* Hero Section */}
-      <section className="relative px-6 py-24 md:py-32 flex flex-col items-center text-center max-w-5xl mx-auto overflow-hidden">
+      <section className="relative px-6 py-24 md:py-32 flex flex-col items-center text-center max-w-5xl mx-auto z-10">
         
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15 mb-8">
-          <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-          <span className="text-xs font-bold tracking-widest uppercase font-label text-on-surface-variant">Powered by Gemini 2.5 Flash</span>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md shadow-lg shadow-primary/10">
+          <span className="w-2 h-2 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_rgba(255,0,0,0.5)]"></span>
+          <span className="text-[10px] font-black tracking-[0.2em] uppercase font-label text-on-surface-variant">Powered by Gemini 2.5 Flash</span>
         </div>
         
-        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-on-surface leading-[1.1]">
-          Generate Viral <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Captions</span> Instantly 🚀
+        <h1 className="font-headline text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[1]">
+          Generate <span className="vibrant-gradient-text">Viral</span> <br/>
+          Captions Instantly 🚀
         </h1>
         
-        <p className="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl mb-12 leading-relaxed">
-          Unlock higher engagement with AI-powered captions crafted for your audience.
+        <p className="font-body text-lg md:text-2xl text-on-surface-variant max-w-2xl mb-12 leading-relaxed opacity-90">
+          Stop staring at a blank screen. Unlock higher engagement with <span className="text-white font-bold underline decoration-secondary/50 decoration-4 underline-offset-4">AI-powered</span> storytelling.
         </p>
 
         {/* Main Input Card */}
-        <div className="w-full max-w-3xl glass-panel bg-surface-variant/60 border border-outline-variant/15 rounded-xl p-6 md:p-10 shadow-xl relative overflow-hidden">
+        <div className="w-full max-w-3xl glass-panel-heavy rounded-3xl p-8 md:p-12 shadow-2xl relative border border-white/10 ring-1 ring-white/5 group">
+          
+          {/* Subtle Inner Glow */}
+          <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 text-left">
             {/* Topic Input */}
-            <div className="flex flex-col gap-2 text-left">
-              <label className="font-label text-xs font-bold uppercase tracking-wider text-primary ml-1">What's your post about?</label>
-              <div className="relative group">
-                <input 
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
-                  className="w-full bg-surface-container border border-transparent rounded-DEFAULT px-5 py-4 focus:border-primary/40 focus:bg-surface-bright transition-all text-on-surface placeholder:text-outline" 
-                  placeholder="e.g. solo travel to Japan" 
-                  type="text" 
-                />
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="material-symbols-outlined text-primary text-lg">edit_note</span>
+                <label className="font-label text-xs font-black uppercase tracking-widest text-primary/80">Content Topic</label>
               </div>
+              <input 
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                className="input-field shadow-inner" 
+                placeholder="e.g. coffee shop aesthetics in Paris" 
+                type="text" 
+              />
             </div>
 
             {/* Mood Selection */}
-            <div className="flex flex-col gap-2 text-left">
-              <label className="font-label text-xs font-bold uppercase tracking-wider text-primary ml-1">Vibe & Mood</label>
-              <select 
-                value={mood}
-                onChange={(e) => setMood(e.target.value)}
-                className="w-full bg-surface-container border border-transparent rounded-DEFAULT px-5 py-4 focus:border-primary/40 focus:bg-surface-bright transition-all text-on-surface appearance-none cursor-pointer">
-                <option>Funny & Witty</option>
-                <option>Sad & Deep</option>
-                <option>Motivational</option>
-                <option>Sarcastic</option>
-                <option>Professional</option>
-                <option>Aesthetic & Minimal</option>
-              </select>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="material-symbols-outlined text-secondary text-lg">mood</span>
+                <label className="font-label text-xs font-black uppercase tracking-widest text-secondary/80">Tone & Energy</label>
+              </div>
+              <div className="relative group">
+                <select 
+                  value={mood}
+                  onChange={(e) => setMood(e.target.value)}
+                  className="input-field appearance-none cursor-pointer pr-10">
+                  <option>Funny & Witty</option>
+                  <option>Sad & Deep</option>
+                  <option>Motivational</option>
+                  <option>Sarcastic</option>
+                  <option>Professional</option>
+                  <option>Aesthetic & Minimal</option>
+                </select>
+                <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">expand_more</span>
+              </div>
             </div>
 
             {/* Platform Selector */}
-            <div className="flex flex-col gap-2 text-left md:col-span-2">
-              <label className="font-label text-xs font-bold uppercase tracking-wider text-primary ml-1">Target Platform</label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="flex flex-col gap-4 md:col-span-2">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="material-symbols-outlined text-accent text-lg">bolt</span>
+                <label className="font-label text-xs font-black uppercase tracking-widest text-accent/80">Target Content</label>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {platformList.map((p) => (
                   <button 
                     key={p.id}
                     onClick={() => setPlatform(p.id)}
-                    className={`flex items-center justify-center gap-2 py-3 border rounded-DEFAULT font-bold transition-all hover:scale-[1.02] active:scale-95 ${
+                    className={`flex items-center justify-center gap-2 py-4 border rounded-xl font-bold transition-all hover:scale-[1.05] active:scale-95 ${
                       platform === p.id 
-                        ? "bg-primary/20 border-primary text-primary" 
-                        : "bg-surface-container border-transparent text-on-surface-variant hover:text-white"
+                        ? "bg-gradient-to-br from-primary/30 to-secondary/30 border-white/20 text-white shadow-lg shadow-primary/20" 
+                        : "bg-white/5 border-transparent text-zinc-400 hover:text-white hover:bg-white/10"
                     }`}
                   >
                     <span className="material-symbols-outlined text-xl" data-icon={p.icon}>{p.icon}</span>
-                    <span>{p.id}</span>
+                    <span className="text-sm">{p.id}</span>
                   </button>
                 ))}
               </div>
@@ -151,7 +176,8 @@ Return exactly this format as raw JSON without markdown format blocks around it:
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-error/20 text-error rounded-lg text-sm font-medium border border-error/30 text-left">
+            <div className="mb-8 p-5 bg-red-500/10 text-red-400 rounded-xl text-sm font-semibold border border-red-500/20 text-left flex items-start gap-3">
+              <span className="material-symbols-outlined">error</span>
               {error}
             </div>
           )}
@@ -160,15 +186,15 @@ Return exactly this format as raw JSON without markdown format blocks around it:
           <button 
             onClick={handleGenerate}
             disabled={loading}
-            className="w-full bg-primary disabled:opacity-50 disabled:active:scale-100 text-on-primary font-headline font-semibold text-lg py-4 rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center justify-center gap-3 relative z-10 overflow-hidden group">
-            <span className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-            <span className="relative">{loading ? "Generating Magic..." : "Generate Magic"}</span>
-            <span className={`material-symbols-outlined relative ${loading ? "animate-spin" : ""}`} data-icon={loading ? "hourglass_empty" : "auto_awesome"}>
+            className="btn-primary w-full shadow-2xl shadow-primary/20 flex items-center justify-center gap-3 relative z-10 group/btn">
+            <span className="relative z-10">{loading ? "Weaving Magic..." : "Generate Magic"}</span>
+            <span className={`material-symbols-outlined relative z-10 ${loading ? "animate-spin" : "group-hover/btn:translate-x-1 transition-transform"}`} data-icon={loading ? "hourglass_empty" : "auto_awesome"}>
               {loading ? "hourglass_empty" : "auto_awesome"}
             </span>
           </button>
         </div>
       </section>
+
 
       {/* Results Section */}
       {results && (

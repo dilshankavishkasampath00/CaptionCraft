@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEY = import.meta.env.VITE_AI_API_KEY;
 console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
 
 export default function BioGenerator() {
@@ -39,21 +39,26 @@ Return exactly this format as raw JSON:
 }
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+      const res = await fetch(`https://openrouter.ai/api/v1/chat/completions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`,
+          "HTTP-Referer": window.location.origin,
+          "X-Title": "CaptionCraft App"
+        },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7
-          }
+          model: "google/gemini-2.5-flash",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+          max_tokens: 1000
         }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || "Failed to generate");
 
-      let text = data.candidates[0].content.parts[0].text;
+      let text = data.choices[0].message.content;
       setResults(JSON.parse(text).bios);
     } catch (err) {
       console.error(err);
@@ -64,25 +69,31 @@ Return exactly this format as raw JSON:
   };
 
   return (
-    <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
+    <main className="relative pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-screen kinetic-bg">
       <Helmet>
         <title>AI Social Media Bio Generator - Instantly Craft Your Digital Soul</title>
         <meta name="description" content="Use our free AI bio generator to create unique, engaging, and professional social media bios for Instagram, TikTok, LinkedIn, and more." />
       </Helmet>
+
+      {/* Decorative blobs */}
+      <div className="absolute top-0 left-1/4 w-[30%] h-[30%] bg-accent/20 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+
       {/* Hero & Kinetic Aura */}
-      <div className="relative mb-16">
-        <div className="relative z-10 text-center md:text-left max-w-3xl">
-          <span className="inline-block px-4 py-1.5 rounded-sm bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest uppercase mb-6">
-            AI-Powered Creative
+      <div className="relative mb-20">
+        <div className="relative z-10 text-center md:text-left max-w-4xl">
+          <span className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black tracking-widest uppercase mb-8 backdrop-blur-sm">
+            AI-Powered Creative ✨
           </span>
-          <h1 className="font-headline text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-            Craft your <span className="text-primary">digital soul.</span>
+          <h1 className="font-headline text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[0.9]">
+            Your <span className="vibrant-gradient-text">Digital Soul</span> <br/>
+            Refined.
           </h1>
-          <p className="text-on-surface-variant text-lg md:text-xl max-w-xl font-light">
+          <p className="text-on-surface-variant text-xl md:text-2xl max-w-2xl font-light opacity-90 leading-relaxed">
             Transform your personality into a high-converting social bio in seconds. Stand out from the noise.
           </p>
         </div>
       </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Input Section */}

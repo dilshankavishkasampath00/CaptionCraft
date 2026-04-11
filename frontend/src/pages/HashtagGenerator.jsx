@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEY = import.meta.env.VITE_AI_API_KEY;
 console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
 
 export default function HashtagGenerator() {
@@ -33,21 +33,26 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 Limit each array to 10 hashtags (30 hashtags total).
 `;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+      const res = await fetch(`https://openrouter.ai/api/v1/chat/completions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`,
+          "HTTP-Referer": window.location.origin,
+          "X-Title": "CaptionCraft App"
+        },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7
-          }
+          model: "google/gemini-2.5-flash",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+          max_tokens: 1000
         }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || "Failed to generate");
 
-      let text = data.candidates[0].content.parts[0].text;
+      let text = data.choices[0].message.content;
       const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
          setResults(JSON.parse(jsonMatch[0]));
@@ -70,22 +75,29 @@ Limit each array to 10 hashtags (30 hashtags total).
   ];
 
   return (
-    <main className="relative pt-24 pb-16 min-h-screen">
+    <main className="relative pt-32 pb-16 min-h-screen kinetic-bg overflow-hidden">
       <Helmet>
         <title>Viral Hashtag Generator - Instagram & TikTok Strategy</title>
         <meta name="description" content="Stop guessing! Let our AI generate the perfect mix of niche, trending, and broad hashtags to maximize your reach on Instagram, TikTok and LinkedIn." />
       </Helmet>
-      <div className="max-w-7xl mx-auto px-6">
+
+      {/* Background Blobs */}
+      <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-secondary/10 blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-primary/10 blur-[150px] rounded-full pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-on-surface">
-            Viral <span className="text-primary">Hashtag Generator</span>
+        <div className="mb-16 text-center md:text-left">
+          <h1 className="font-headline text-5xl md:text-7xl font-black tracking-tight mb-6">
+            Viral <span className="vibrant-gradient-text">Hashtag</span> <br/>
+            Strategy 📈
           </h1>
-          <p className="text-on-surface-variant text-lg max-w-2xl">
+          <p className="text-on-surface-variant text-lg md:text-xl max-w-2xl opacity-80">
             Stop guessing! Let AI analyze your topic and generate the perfect mix of niche, trending, and broad hashtags for maximum reach.
           </p>
         </div>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
