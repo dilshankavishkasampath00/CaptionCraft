@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { Analytics } from "@vercel/analytics/react";
 import TopNavBar from "./components/TopNavBar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -37,6 +38,7 @@ function App() {
         </div>
         <Footer />
       </div>
+      <Analytics />
     </Router>
   );
 }
