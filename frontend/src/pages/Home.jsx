@@ -197,6 +197,10 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 
 
       {/* Results Section */}
+      {/* Ad Container - native banner (increased visibility) */}
+      <div className="px-6 py-6 flex justify-center">
+        <div id="container-06c285826fc9d72d9805a56411d42054" className="w-full max-w-4xl min-h-[120px] rounded-xl border border-white/10 bg-white/5" />
+      </div>
       {results && (
         <section className="px-6 max-w-5xl mx-auto pb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <h2 className="font-headline text-3xl font-bold mb-8 text-on-surface text-center">Your Generated Captions</h2>

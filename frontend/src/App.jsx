@@ -115,9 +115,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
           </Routes>
-          <div className="px-6 py-6 flex justify-center">
-            <div id="container-06c285826fc9d72d9805a56411d42054" className="w-full max-w-4xl min-h-[120px] rounded-xl border border-white/10 bg-white/5" />
-          </div>
+          {/* Ad container removed from global layout — placed per-page for better visibility */}
         </div>
         <Footer />
       </div>
