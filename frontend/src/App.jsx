@@ -98,6 +98,17 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
+        {/* Hidden ad containers for ad provider scripts */}
+        <div id="ad-160x300" style={{ display: 'none' }} />
+        <div id="ad-160x600" style={{ display: 'none' }} />
+        <div id="ad-300x250" style={{ display: 'none' }} />
+        <div id="ad-320x50" style={{ display: 'none' }} />
+        <div id="ad-468x60" style={{ display: 'none' }} />
+        <div id="ad-728x90" style={{ display: 'none' }} />
+        <div id="ad-native-banner" style={{ display: 'none' }} />
+        <div id="ad-popunder" style={{ display: 'none' }} />
+        <div id="ad-socialbar" style={{ display: 'none' }} />
+        
         <Helmet>
           <title>CaptionCraft AI - Social Media Caption & Bio Generator</title>
           <meta name="description" content="Generate catchy, engaging Instagram and TikTok captions, bios, and hashtags instantly with CaptionCraft AI." />
