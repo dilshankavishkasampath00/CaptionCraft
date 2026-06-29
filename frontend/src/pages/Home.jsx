@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import AdPlacement from "../components/AdPlacement";
 
 const API_KEY = import.meta.env.VITE_AI_API_KEY;
 console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
@@ -197,9 +198,11 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 
 
       {/* Results Section */}
-      {/* Ad Container - native banner (increased visibility) */}
       <div className="px-6 py-6 flex justify-center">
-        <div id="container-06c285826fc9d72d9805a56411d42054" className="w-full max-w-4xl min-h-[120px] rounded-xl border border-white/10 bg-white/5" />
+        <AdPlacement id="ad-mid-page" label="Mid-Page Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+      </div>
+      <div className="px-6 py-6 flex justify-center">
+        <AdPlacement id="container-06c285826fc9d72d9805a56411d42054" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
       </div>
       {results && (
         <section className="px-6 max-w-5xl mx-auto pb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -251,6 +254,10 @@ Return exactly this format as raw JSON without markdown format blocks around it:
           )}
         </section>
       )}
+
+      <div className="px-8 py-6 flex justify-center">
+        <AdPlacement id="ad-native-features" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
+      </div>
 
       {/* Bento Grid Feature Section */}
       <section className="px-8 max-w-7xl mx-auto pb-32">

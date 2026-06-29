@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import TopNavBar from "./components/TopNavBar";
 import Footer from "./components/Footer";
+import AdPlacement from "./components/AdPlacement";
 import Home from "./pages/Home";
 import BioGenerator from "./pages/BioGenerator";
 import HashtagGenerator from "./pages/HashtagGenerator";
@@ -104,18 +105,38 @@ function App() {
         </Helmet>
         <TopNavBar />
         <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/bio" element={<BioGenerator />} />
-            <Route path="/hashtags" element={<HashtagGenerator />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-          </Routes>
-          {/* Ad container removed from global layout — placed per-page for better visibility */}
+          <div className="relative">
+            <div className="hidden xl:block fixed left-4 top-24 z-30 w-[160px]">
+              <AdPlacement id="ad-sidebar-left" label="Left Sidebar" size="160 × 600" className="h-[600px]" />
+            </div>
+            <div className="hidden xl:block fixed right-4 top-24 z-30 w-[160px]">
+              <AdPlacement id="ad-sidebar-right" label="Right Sidebar" size="160 × 300" className="h-[300px]" />
+            </div>
+
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:pl-[190px] xl:pr-[190px]">
+              <div className="mx-auto mb-6 flex justify-center pt-4">
+                <AdPlacement id="ad-top-banner" label="Sticky Top Banner" size="728 × 90" className="sticky top-20 h-[90px] w-full max-w-[728px]" />
+              </div>
+
+              <div className="pb-24">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/bio" element={<BioGenerator />} />
+                  <Route path="/hashtags" element={<HashtagGenerator />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/blog" element={<Blog />} />
+                </Routes>
+              </div>
+
+              <div className="mx-auto mt-6 flex justify-center pb-8">
+                <AdPlacement id="ad-bottom-banner" label="Sticky Bottom Banner" size="468 × 60" className="sticky bottom-4 h-[60px] w-full max-w-[468px]" />
+              </div>
+            </div>
+          </div>
         </div>
         <Footer />
       </div>

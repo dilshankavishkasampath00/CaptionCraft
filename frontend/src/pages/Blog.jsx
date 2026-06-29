@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import AdPlacement from "../components/AdPlacement";
 
 export default function Blog() {
   const posts = [
@@ -38,9 +39,11 @@ export default function Blog() {
         <p className="text-xl text-on-surface-variant max-w-2xl mx-auto">Master the art of social media growth with our latest insights, strategies, and platform-specific tips.</p>
       </div>
 
-      {/* Ad Container - native banner (increased visibility) */}
       <div className="px-6 py-6 flex justify-center">
-        <div id="container-06c285826fc9d72d9805a56411d42054" className="w-full max-w-4xl min-h-[120px] rounded-xl border border-white/10 bg-white/5" />
+        <AdPlacement id="container-06c285826fc9d72d9805a56411d42054" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
+      </div>
+      <div className="px-6 py-6 flex justify-center">
+        <AdPlacement id="ad-blog-inline" label="Mid-Page Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
