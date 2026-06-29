@@ -107,15 +107,19 @@ function App() {
         <div className="flex-grow">
           <div className="relative">
             <div className="hidden xl:block fixed left-4 top-24 z-30 w-[160px]">
-              <AdPlacement id="ad-sidebar-left" label="Left Sidebar" size="160 × 600" className="h-[600px]" />
+              <div className="sticky top-24">
+                <AdPlacement id="ad-160x600" label="Left Sidebar" size="160 × 600" className="h-[600px] w-[160px]" />
+              </div>
             </div>
             <div className="hidden xl:block fixed right-4 top-24 z-30 w-[160px]">
-              <AdPlacement id="ad-sidebar-right" label="Right Sidebar" size="160 × 300" className="h-[300px]" />
+              <div className="sticky top-24">
+                <AdPlacement id="ad-160x300" label="Right Sidebar" size="160 × 300" className="h-[300px] w-[160px]" />
+              </div>
             </div>
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:pl-[190px] xl:pr-[190px]">
               <div className="mx-auto mb-6 flex justify-center pt-4">
-                <AdPlacement id="ad-top-banner" label="Sticky Top Banner" size="728 × 90" className="sticky top-20 h-[90px] w-full max-w-[728px]" />
+                <AdPlacement id="ad-728x90" label="Sticky Top Banner" size="728 × 90" className="sticky top-20 h-[90px] w-full max-w-[728px]" />
               </div>
 
               <div className="pb-24">
@@ -133,7 +137,7 @@ function App() {
               </div>
 
               <div className="mx-auto mt-6 flex justify-center pb-8">
-                <AdPlacement id="ad-bottom-banner" label="Sticky Bottom Banner" size="468 × 60" className="sticky bottom-4 h-[60px] w-full max-w-[468px]" />
+                <AdPlacement id="ad-468x60" label="Sticky Bottom Banner" size="468 × 60" className="sticky bottom-4 h-[60px] w-full max-w-[468px]" />
               </div>
             </div>
           </div>

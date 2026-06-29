@@ -45,6 +45,9 @@ export default function Blog() {
       <div className="px-6 py-6 flex justify-center">
         <AdPlacement id="ad-blog-inline" label="Mid-Page Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
       </div>
+      <div className="px-6 pb-6 flex justify-center">
+        <AdPlacement id="ad-blog-inline-2" label="Inline Banner" size="468 × 60" className="h-[60px] w-full max-w-[468px]" />
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map(post => (
@@ -65,6 +68,10 @@ export default function Blog() {
             </div>
           </article>
         ))}
+      </div>
+
+      <div className="px-6 pt-10 flex justify-center">
+        <AdPlacement id="ad-blog-footer" label="Footer Banner" size="728 × 90" className="h-[90px] w-full max-w-[728px]" />
       </div>
     </main>
   );
