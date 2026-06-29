@@ -42,6 +42,22 @@ export default function Footer() {
         >
           Privacy
         </Link>
+        <a
+          href="https://github.com/dilshankavishkasampath00"
+          target="_blank"
+          rel="noreferrer"
+          className="text-on-surface-variant hover:text-primary underline-offset-4 hover:underline transition-colors duration-300"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://github.com/dilshankavishkasampath00/CaptionCraft"
+          target="_blank"
+          rel="noreferrer"
+          className="text-on-surface-variant hover:text-primary underline-offset-4 hover:underline transition-colors duration-300"
+        >
+          Repo
+        </a>
       </div>
     </footer>
   );

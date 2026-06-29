@@ -15,6 +15,24 @@ export default function About() {
           <p className="text-lg text-on-surface-variant leading-relaxed">
             Whether you need something professional for LinkedIn, or unhinged for TikTok, CaptionCraft acts as your ever-present digital copywriter.
           </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a
+              href="https://github.com/dilshankavishkasampath00"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+            >
+              GitHub Profile
+            </a>
+            <a
+              href="https://github.com/dilshankavishkasampath00/CaptionCraft"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center rounded-full border border-outline/30 px-4 py-2 text-sm font-semibold text-on-surface transition-colors hover:bg-surface-container"
+            >
+              View Repository
+            </a>
+          </div>
         </div>
         
         <div className="flex-1 flex justify-center">
