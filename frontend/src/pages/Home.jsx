@@ -108,7 +108,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
         </p>
 
         <div className="mb-8 flex justify-center">
-          <AdPlacement id="ad-320x50" label="Hero Ad" size="320 × 50" className="h-[50px] w-full max-w-[320px]" />
+          <AdPlacement containerId="ad-slot-320x50" label="Hero Ad" size="320 × 50" className="h-[50px] w-full max-w-[320px]" />
         </div>
 
         {/* Main Input Card */}
@@ -203,13 +203,13 @@ Return exactly this format as raw JSON without markdown format blocks around it:
 
       {/* Results Section */}
       <div className="px-6 py-6 flex justify-center">
-        <AdPlacement id="ad-300x250" label="Mid-Page Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+        <AdPlacement containerId="ad-slot-300x250" label="Mid-Page Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
       </div>
       <div className="px-6 py-6 flex justify-center">
-        <AdPlacement id="ad-native-banner" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
+        <AdPlacement containerId="ad-slot-native-banner" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
       </div>
       <div className="px-6 py-6 flex justify-center">
-        <AdPlacement id="ad-300x250-alt" label="Inline Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+        <AdPlacement containerId="ad-slot-300x250-alt" label="Inline Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
       </div>
       {results && (
         <section className="px-6 max-w-5xl mx-auto pb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -263,7 +263,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
       )}
 
       <div className="px-8 py-6 flex justify-center">
-        <AdPlacement id="ad-native-banner-feature" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
+        <AdPlacement containerId="ad-slot-native-banner-feature" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
       </div>
 
       {/* Bento Grid Feature Section */}
@@ -317,7 +317,7 @@ Return exactly this format as raw JSON without markdown format blocks around it:
       </section>
       
       <div className="px-8 pb-10 flex justify-center">
-        <AdPlacement id="ad-728x90-footer" label="Footer Banner" size="728 × 90" className="h-[90px] w-full max-w-[728px]" />
+        <AdPlacement containerId="ad-slot-728x90-footer" label="Footer Banner" size="728 × 90" className="h-[90px] w-full max-w-[728px]" />
       </div>
 
       {/* FAB for quick access (Mobile Only) */}

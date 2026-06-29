@@ -1,7 +1,7 @@
-export default function AdPlacement({ id, label, size, className = "" }) {
+export default function AdPlacement({ containerId, label, size, className = "" }) {
   return (
     <div
-      id={id}
+      id={containerId}
       className={`relative flex items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-center text-[11px] uppercase tracking-[0.22em] text-zinc-400/80 backdrop-blur-sm ${className}`}
       aria-label={`${label} advertisement`}
       title={`${label} advertisement`}

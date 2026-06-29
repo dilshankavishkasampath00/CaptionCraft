@@ -40,13 +40,13 @@ export default function Blog() {
       </div>
 
       <div className="px-6 py-6 flex justify-center">
-        <AdPlacement id="container-06c285826fc9d72d9805a56411d42054" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
+        <AdPlacement containerId="ad-slot-blog-native" label="Native Banner" size="Native Banner" className="min-h-[120px] w-full max-w-4xl" />
       </div>
       <div className="px-6 py-6 flex justify-center">
-        <AdPlacement id="ad-blog-inline" label="Mid-Page Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+        <AdPlacement containerId="ad-slot-blog-inline" label="Mid-Page Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
       </div>
       <div className="px-6 pb-6 flex justify-center">
-        <AdPlacement id="ad-blog-inline-2" label="Inline Banner" size="468 × 60" className="h-[60px] w-full max-w-[468px]" />
+        <AdPlacement containerId="ad-slot-blog-inline-2" label="Inline Banner" size="468 × 60" className="h-[60px] w-full max-w-[468px]" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -71,7 +71,7 @@ export default function Blog() {
       </div>
 
       <div className="px-6 pt-10 flex justify-center">
-        <AdPlacement id="ad-blog-footer" label="Footer Banner" size="728 × 90" className="h-[90px] w-full max-w-[728px]" />
+        <AdPlacement containerId="ad-slot-blog-footer" label="Footer Banner" size="728 × 90" className="h-[90px] w-full max-w-[728px]" />
       </div>
     </main>
   );
