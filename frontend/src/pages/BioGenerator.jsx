@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import AdPlacement from "../components/AdPlacement";
 
 const API_KEY = import.meta.env.VITE_AI_API_KEY;
 console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
@@ -94,6 +95,10 @@ Return exactly this format as raw JSON:
         </div>
       </div>
 
+      {/* Ad: After Input Form */}
+      <div className="lg:col-span-5 flex justify-center">
+        <AdPlacement containerId="ad-slot-bio-form" label="Below Form Ad" size="300 × 250" className="h-[250px] w-full" />
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Input Section */}
@@ -159,6 +164,11 @@ Return exactly this format as raw JSON:
 
         {/* Results Grid */}
         <section className="lg:col-span-7 space-y-8">
+          {/* Ad: Top of Results */}
+          <div className="flex justify-center">
+            <AdPlacement containerId="ad-slot-bio-results" label="Results Ad" size="300 × 250" className="h-[250px] w-full" />
+          </div>
+
           <div className="flex items-end justify-between px-2">
             <h3 className="font-headline text-3xl font-extrabold tracking-tight">Curated <span className="text-secondary italic">Options</span></h3>
             <span className="text-outline text-sm">{results ? results.length : 0} Results Found</span>

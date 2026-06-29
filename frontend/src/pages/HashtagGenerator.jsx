@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import AdPlacement from "../components/AdPlacement";
 
 const API_KEY = import.meta.env.VITE_AI_API_KEY;
 console.log("Debug - API Key Loaded:", API_KEY ? "Present" : "UNDEFINED");
@@ -104,6 +105,9 @@ Limit each array to 10 hashtags (30 hashtags total).
           {/* Editor/Input Section */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-surface-container-low border border-outline-variant/20 rounded-xl p-8 relative overflow-hidden">
+              <div className="mb-6 flex justify-center">
+                <AdPlacement containerId="ad-slot-hashtag-form" label="Form Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+              </div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[50px] pointer-events-none rounded-full"></div>
               
               <div className="space-y-8 relative z-10">
@@ -162,6 +166,9 @@ Limit each array to 10 hashtags (30 hashtags total).
 
           {/* Results Preview Section */}
           <div className="lg:col-span-7">
+            <div className="mb-6 flex justify-center">
+              <AdPlacement containerId="ad-slot-hashtag-results" label="Results Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+            </div>
             {results ? (
               <div className="bg-surface-container-low border border-outline-variant/20 rounded-xl p-8 h-full animate-in fade-in slide-in-from-bottom-8 duration-700">
                 <div className="flex justify-between items-center mb-8">

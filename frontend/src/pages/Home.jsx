@@ -200,6 +200,10 @@ Return exactly this format as raw JSON without markdown format blocks around it:
         </div>
       </section>
 
+      {/* Ad: Below Search Form */}
+      <div className="px-6 py-6 flex justify-center">
+        <AdPlacement containerId="ad-slot-300x250-form" label="Below Form Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+      </div>
 
       {/* Results Section */}
       <div className="px-6 py-6 flex justify-center">
@@ -215,6 +219,11 @@ Return exactly this format as raw JSON without markdown format blocks around it:
         <section className="px-6 max-w-5xl mx-auto pb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <h2 className="font-headline text-3xl font-bold mb-8 text-on-surface text-center">Your Generated Captions</h2>
           
+          {/* Ad: Above Results */}
+          <div className="px-6 py-6 flex justify-center mb-8">
+            <AdPlacement containerId="ad-slot-300x250-results" label="Results Top Ad" size="300 × 250" className="h-[250px] w-full max-w-[300px]" />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {results.captions.map((cap, i) => (
               <div key={`cap-${i}`} className="glass-panel p-6 rounded-xl border border-outline/10 hover:border-primary/50 transition-colors group relative">
@@ -317,13 +326,20 @@ Return exactly this format as raw JSON without markdown format blocks around it:
       </section>
       
       <div className="px-8 pb-10 flex justify-center">
-        <AdPlacement containerId="ad-slot-728x90-footer" label="Footer Banner" size="728 × 90" className="h-[90px] w-full max-w-[728px]" />
+        <AdPlacement containerId="ad-slot-728x90-prefooter" label="Pre-Footer Banner" size="728 × 90" className="h-[90px] w-full max-w-[728px]" />
       </div>
 
-      {/* FAB for quick access (Mobile Only) */}
-      <button className="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg md:hidden z-50 group active:scale-90 transition-transform">
+      {/* FAB for quick access (Mobile Only) + Sticky Bottom Banner */}
+      <button className="fixed bottom-24 right-8 md:bottom-8 w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg md:hidden z-50 group active:scale-90 transition-transform">
         <span className="material-symbols-outlined text-white text-3xl" data-icon="add">add</span>
       </button>
+
+      {/* Mobile Sticky Bottom Banner */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden z-40 px-2 py-2 bg-surface/95 backdrop-blur-md border-t border-surface-container">
+        <div className="flex justify-center">
+          <AdPlacement containerId="ad-slot-mobile-bottom" label="Mobile Bottom Banner" size="320 × 50" className="h-[50px] w-full max-w-[320px]" />
+        </div>
+      </div>
     </main>
   );
 }
